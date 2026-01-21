@@ -56,7 +56,15 @@ app.post("/api/login", (req, res) => {
   const user = db.users.find((u) => u.username === username && u.password === password);
   if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
-  res.json({ message: "Login success", user: { id: user.id, username: user.username } });
+ res.json({
+  message: "Login success",
+  user: {
+    id: user.id,
+    username: user.username,
+    role: user.role || "user"
+  }
+});
+
 });
 
 // ---------------- GAMES ----------------
