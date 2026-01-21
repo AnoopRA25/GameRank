@@ -1,13 +1,19 @@
 import express from "express";
 import cors from "cors";
 import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 const PORT = 5000;
-const DB_FILE = "./db.json";
+
+// ✅ Always read db.json from backend folder itself (Fixes wrong db issue)
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const DB_FILE = path.join(__dirname, "db.json");
 
 const readDB = () => JSON.parse(fs.readFileSync(DB_FILE, "utf-8"));
 const writeDB = (data) => fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
@@ -44,21 +50,13 @@ app.get("/api/games", (req, res) => {
   res.json(db.games);
 });
 
-// ✅ Get single game detail
-app.get("/api/games/:id", (req, res) => {
-  const db = readDB();
-  const game = db.games.find((g) => g.id == req.params.id);
-  if (!game) return res.status(404).json({ message: "Game not found" });
-  res.json(game);
-});
-
-// ✅ Trending games
+// ✅ Trending games ✅ MUST BE BEFORE :id
 app.get("/api/games/trending", (req, res) => {
   const db = readDB();
   res.json(db.games.filter((g) => g.trending));
 });
 
-// ✅ Ranked games
+// ✅ Ranked games ✅ MUST BE BEFORE :id
 app.get("/api/games/ranked", (req, res) => {
   const db = readDB();
 
@@ -71,6 +69,16 @@ app.get("/api/games/ranked", (req, res) => {
 
   res.json(ranked);
 });
+
+// ✅ Get single game detail ✅ KEEP THIS LAST
+app.get("/api/games/:id", (req, res) => {
+  const db = readDB();
+  const game = db.games.find((g) => g.id == req.params.id);
+
+  if (!game) return res.status(404).json({ message: "Game not found" });
+  res.json(game);
+});
+
 
 // ✅ Compare
 app.get("/api/compare", (req, res) => {
@@ -85,4 +93,7 @@ app.get("/api/compare", (req, res) => {
   res.json({ game1, game2 });
 });
 
-app.listen(PORT, () => console.log(`✅ Backend running: http://localhost:${PORT}`));
+app.listen(PORT, () => {
+  console.log(`✅ Backend running: http://localhost:${PORT}`);
+  console.log("✅ Using DB file:", DB_FILE);
+});

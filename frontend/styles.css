@@ -78,6 +78,10 @@ select {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 15px;
 }
+.pop {
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
 
 /* ---------- New styles for login page ---------- */
 .animated-bg{position:fixed;inset:0;overflow:hidden;z-index:0}
