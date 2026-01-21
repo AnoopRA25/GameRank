@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Admin - GameRank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="animated-bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+  </div>
+
+  <nav class="topnav">
+    <div class="brand">🎮 <strong>GameRank</strong></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="compare.html">Compare</a>
+      <a href="leaderboard.html">Leaderboard</a>
+      <a href="login.html" onclick="logout()">Logout</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1>🛠 Admin Panel</h1>
+    <p class="muted">Add / Edit / Delete games (simple admin panel).</p>
+
+    <div class="card">
+      <h2>Add New Game</h2>
+
+      <div class="admin-form">
+        <input class="input" id="gname" placeholder="Game Name (ex: GTA VI)">
+        <input class="input" id="gcategory" placeholder="Category (ex: Open World)">
+        <input class="input" id="grating" type="number" step="0.1" placeholder="Rating (ex: 4.7)">
+        <input class="input" id="gdownloads" type="number" placeholder="Downloads (ex: 250)">
+        <input class="input" id="gpopularity" type="number" placeholder="Popularity (ex: 90)">
+
+        <select id="gtrending">
+          <option value="true">Trending</option>
+          <option value="false">Not Trending</option>
+        </select>
+
+        <button class="btn" onclick="addGame()">Add Game</button>
+      </div>
+    </div>
+
+    <h2>📌 Manage Games</h2>
+    <div id="adminGames" class="grid"></div>
+  </main>
+
+  <script src="app.js"></script>
+<script src="admin.js"></script>
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Game Details - GameRank</title>
+  <title>Leaderboard - GameRank</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -18,19 +18,20 @@
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="compare.html">Compare</a>
-      <a href="leaderboard.html">Leaderboard</a>
       <a href="admin.html">Admin</a>
       <a href="login.html" onclick="logout()">Logout</a>
     </div>
   </nav>
 
   <main class="container">
-    <div id="gameDetails"></div>
+    <h1>🏆 Global Leaderboard</h1>
+    <p class="muted">Top players ranked by total points.</p>
+
+    <div id="leaderboardList" class="list-grid"></div>
   </main>
 
   <script src="app.js"></script>
-  <script>
-    loadGameDetails();
-  </script>
+<script src="leaderboard.js"></script>
+
 </body>
 </html>

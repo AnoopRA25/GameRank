@@ -1,6 +1,10 @@
 const API = "http://localhost:5000/api";
 
-// =============== AUTH ==================
+let allGamesData = [];
+let currentPage = 1;
+const limit = 10;
+
+// ================= AUTH =================
 async function register() {
   const username = document.getElementById("username")?.value || "";
   const password = document.getElementById("password")?.value || "";
@@ -39,14 +43,15 @@ function logout() {
   localStorage.removeItem("user");
 }
 
-// =============== HOME PAGE ==================
-let allGamesData = [];
+// ================= UTIL =================
+function calcScore(g) {
+  return (g.rating * 20) + g.popularity + (g.downloads / 10);
+}
 
+// ================= HOME =================
 async function loadHome() {
-  const trendingBox = document.getElementById("trending");
-  const rankedBox = document.getElementById("ranked");
-
   // Trending
+  const trendingBox = document.getElementById("trending");
   if (trendingBox) {
     const tRes = await fetch(`${API}/games/trending`);
     const trending = await tRes.json();
@@ -54,108 +59,98 @@ async function loadHome() {
   }
 
   // Ranked
+  const rankedBox = document.getElementById("ranked");
   if (rankedBox) {
     const rRes = await fetch(`${API}/games/ranked`);
     const ranked = await rRes.json();
-    rankedBox.innerHTML = ranked.map((g, idx) => rankCard(g, idx)).join("");
+    rankedBox.innerHTML = ranked.slice(0, 10).map((g, idx) => rankCard(g, idx)).join("");
   }
 
-  // All Games
+  // Category dropdown init (need all games once)
   const gRes = await fetch(`${API}/games`);
   allGamesData = await gRes.json();
 
-  console.debug('[loadHome] total games loaded:', allGamesData.length);
-
   loadCategoryOptions(allGamesData);
 
-  // default show all games
-  const allGamesEl = document.getElementById("allGames");
-  if (allGamesEl) allGamesEl.innerHTML = allGamesData.map(gameCard).join("");
-
-  // live search (guard in case element missing)
-  const searchEl = document.getElementById("searchInput");
-  if (searchEl) searchEl.addEventListener("input", applyFilters);
+  // First paged load
+  currentPage = 1;
+  await loadPagedGames();
 }
 
 function loadCategoryOptions(games) {
-  const categories = [...new Set(games.map(g => g.category))].sort();
   const dropdown = document.getElementById("categoryFilter");
   if (!dropdown) return;
 
-  dropdown.innerHTML = `<option value="all">All Categories</option>` +
+  const categories = [...new Set(games.map(g => g.category))].sort();
+
+  dropdown.innerHTML =
+    `<option value="all">All Categories</option>` +
     categories.map(c => `<option value="${c}">${c}</option>`).join("");
 }
 
-// Filter + Search + Sort
-function applyFilters() {
-  // read inputs with guards
-  const searchInput = document.getElementById("searchInput");
-  const catEl = document.getElementById("categoryFilter");
-  const trendEl = document.getElementById("trendingFilter");
-  const sortEl = document.getElementById("sortBy");
+// ================= PAGED LIST =================
+async function loadPagedGames() {
+  const search = (document.getElementById("searchInput")?.value || "").trim();
+  const category = document.getElementById("categoryFilter")?.value || "all";
+  const trending = document.getElementById("trendingFilter")?.value || "all";
+  const sortBy = document.getElementById("sortBy")?.value || "score";
 
-  const search = (searchInput && searchInput.value || "").trim().toLowerCase();
-  const category = (catEl && (catEl.value || "all")) || "all";
-  const trending = (trendEl && (trendEl.value || "all")) || "all";
-  const sortBy = (sortEl && (sortEl.value || "score")) || "score";
+  const url =
+    `${API}/games/paged?page=${currentPage}&limit=${limit}` +
+    `&search=${encodeURIComponent(search)}` +
+    `&category=${encodeURIComponent(category)}` +
+    `&trending=${encodeURIComponent(trending)}` +
+    `&sortBy=${encodeURIComponent(sortBy)}`;
 
-  console.debug('[applyFilters] search:', search, 'category:', category, 'trending:', trending, 'sortBy:', sortBy);
+  const res = await fetch(url);
+  const data = await res.json();
 
-  let filtered = [...allGamesData];
+  document.getElementById("allGames").innerHTML = data.games.map(gameCard).join("");
 
-  // more flexible search: match name OR category
-  if (search !== "") {
-    filtered = filtered.filter(g => {
-      const name = (g.name || "").toLowerCase();
-      const cat = (g.category || "").toLowerCase();
-      return name.includes(search) || cat.includes(search);
-    });
-  }
+  const pageInfo = document.getElementById("pageInfo");
+  if (pageInfo) pageInfo.innerText = `Page ${data.page} / ${data.totalPages}`;
 
-  // category (case-insensitive, trimmed)
-  if (category && category !== "all") {
-    const wanted = category.trim().toLowerCase();
-    filtered = filtered.filter(g => ((g.category || "").toLowerCase() === wanted));
-  }
-
-  // trending: accept boolean true/false, string 'true'/'false', numeric 1/0
-  if (trending && trending !== "all") {
-    filtered = filtered.filter(g => {
-      const val = g.trending;
-      const s = String(val).toLowerCase();
-      return s === String(trending).toLowerCase();
-    });
-  }
-
-  // score calc
-  filtered = filtered.map(g => ({
-    ...g,
-    score: (g.rating * 20) + g.popularity + (g.downloads / 10)
-  }));
-
-  // sort (handle missing keys defensively)
-  filtered.sort((a, b) => {
-    if (sortBy === "name") return (a.name || "").localeCompare(b.name || "");
-    const av = (a[sortBy] == null) ? -Infinity : a[sortBy];
-    const bv = (b[sortBy] == null) ? -Infinity : b[sortBy];
-    return bv - av;
-  });
-
-  const allGamesEl = document.getElementById("allGames");
-  if (!allGamesEl) return;
-
-  if (!filtered.length) {
-    console.debug('[applyFilters] no results after filtering');
-    allGamesEl.innerHTML = `<div class="card"><p class="muted">No games found that match your filters.</p></div>`;
-  } else {
-    allGamesEl.innerHTML = filtered.map(gameCard).join("");
+  // quick stats
+  if (document.getElementById("totalGames")) {
+    document.getElementById("totalGames").innerText = data.total;
+    document.getElementById("rankedCount").innerText = 10;
   }
 }
 
-// =============== GAME CARDS ==================
+function nextPage() {
+  currentPage++;
+  loadPagedGames();
+}
+
+function prevPage() {
+  if (currentPage > 1) currentPage--;
+  loadPagedGames();
+}
+
+function applyFilters() {
+  currentPage = 1;
+  loadPagedGames();
+}
+
+function clearFilters() {
+  const search = document.getElementById("searchInput");
+  const cat = document.getElementById("categoryFilter");
+  const trend = document.getElementById("trendingFilter");
+  const sort = document.getElementById("sortBy");
+
+  if (search) search.value = "";
+  if (cat) cat.value = "all";
+  if (trend) trend.value = "all";
+  if (sort) sort.value = "score";
+
+  applyFilters();
+}
+
+// ================= UI CARDS =================
 function gameCard(g) {
   return `
     <div class="card">
+      <img class="poster" src="${g.image}" alt="${g.name}">
       <div class="game-title">${g.name}</div>
       <p>⭐ Rating: ${g.rating}</p>
       <p>📥 Downloads: ${g.downloads}M</p>
@@ -169,14 +164,11 @@ function gameCard(g) {
 }
 
 function rankCard(g, idx) {
-  const score = (g.rating * 20) + g.popularity + (g.downloads / 10);
   return `
     <div class="card">
+      <img class="poster" src="${g.image}" alt="${g.name}">
       <h3>#${idx + 1} ${g.name}</h3>
-      <p>⭐ Rating: ${g.rating}</p>
-      <p>📥 Downloads: ${g.downloads}M</p>
-      <p>🔥 Popularity: ${g.popularity}%</p>
-      <p>🏆 Score: ${score.toFixed(1)}</p>
+      <p>🏆 Score: ${g.score.toFixed(1)}</p>
       <button class="btn" onclick="openGame(${g.id})">View Details</button>
     </div>
   `;
@@ -186,7 +178,7 @@ function openGame(id) {
   window.location.href = `game.html?id=${id}`;
 }
 
-// =============== GAME DETAILS ==================
+// ================= GAME DETAILS =================
 async function loadGameDetails() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
@@ -194,13 +186,14 @@ async function loadGameDetails() {
   const res = await fetch(`${API}/games/${id}`);
   const g = await res.json();
 
-  const score = (g.rating * 20) + g.popularity + (g.downloads / 10);
+  const score = calcScore(g);
 
-  const el = document.getElementById("gameDetails");
-  if (!el) return;
+  const lbRes = await fetch(`${API}/leaderboard/game/${id}`);
+  const leaderboard = await lbRes.json();
 
-  el.innerHTML = `
+  document.getElementById("gameDetails").innerHTML = `
     <div class="card">
+      <img class="banner" src="${g.banner}" alt="${g.name}">
       <h1>${g.name}</h1>
       <p>🎮 Category: ${g.category}</p>
       <p>⭐ Rating: ${g.rating}</p>
@@ -208,17 +201,43 @@ async function loadGameDetails() {
       <p>🔥 Popularity: ${g.popularity}%</p>
       <p>🏆 Ranking Score: ${score.toFixed(1)}</p>
       ${g.trending ? `<div class="badge">🔥 Trending</div>` : ""}
+      <hr>
+      <h3>🏅 Top Players (This Game)</h3>
+      <ul>
+        ${leaderboard.map((x, i) => `<li>#${i + 1} ${x.username} - ${x.points} pts</li>`).join("") || "<li>No scores yet</li>"}
+      </ul>
+      <hr>
+      <h3>🎯 Add Your Score</h3>
+      <input id="scorePoints" class="input" type="number" placeholder="Enter points (ex: 1200)">
+      <button class="btn" onclick="submitScore(${g.id})">Submit Score</button>
       <br><br>
       <button class="btn" onclick="goBack()">⬅ Back</button>
     </div>
   `;
 }
 
+async function submitScore(gameId) {
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const username = user.username || "Guest";
+
+  const points = document.getElementById("scorePoints").value;
+
+  const res = await fetch(`${API}/score`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username, gameId, points })
+  });
+
+  const data = await res.json();
+  alert(data.message);
+  loadGameDetails();
+}
+
 function goBack() {
   window.history.back();
 }
 
-// =============== COMPARE PAGE ==================
+// ================= COMPARE =================
 async function loadComparePage() {
   const res = await fetch(`${API}/games`);
   const games = await res.json();
@@ -226,8 +245,8 @@ async function loadComparePage() {
   const g1 = document.getElementById("game1");
   const g2 = document.getElementById("game2");
 
-  if (g1) g1.innerHTML = games.map(g => `<option value="${g.id}">${g.name}</option>`).join("");
-  if (g2) g2.innerHTML = games.map(g => `<option value="${g.id}">${g.name}</option>`).join("");
+  g1.innerHTML = games.map(g => `<option value="${g.id}">${g.name}</option>`).join("");
+  g2.innerHTML = games.map(g => `<option value="${g.id}">${g.name}</option>`).join("");
 }
 
 async function compareGames() {
@@ -237,25 +256,100 @@ async function compareGames() {
   const res = await fetch(`${API}/compare?g1=${g1}&g2=${g2}`);
   const data = await res.json();
 
-  const { game1, game2 } = data;
-
-  const el = document.getElementById("compareResult");
-  if (!el) return;
-
-  el.innerHTML = `${compareCard(game1)}${compareCard(game2)}`;
+  document.getElementById("compareResult").innerHTML =
+    `${compareCard(data.game1)}${compareCard(data.game2)}`;
 }
 
 function compareCard(g) {
-  const score = (g.rating * 20) + g.popularity + (g.downloads / 10);
+  const score = calcScore(g);
   return `
     <div class="card">
+      <img class="poster" src="${g.image}" alt="${g.name}">
       <h2>${g.name}</h2>
       <p>⭐ Rating: ${g.rating}</p>
       <p>🔥 Popularity: ${g.popularity}%</p>
       <p>📥 Downloads: ${g.downloads}M</p>
-      <p>🎮 Category: ${g.category}</p>
       <p>🏆 Score: ${score.toFixed(1)}</p>
       <button class="btn" onclick="openGame(${g.id})">View Details</button>
     </div>
   `;
+}
+
+// ================= LEADERBOARD PAGE =================
+async function loadLeaderboard() {
+  const res = await fetch(`${API}/leaderboard`);
+  const data = await res.json();
+
+  const el = document.getElementById("leaderboardList");
+  el.innerHTML = data.map((u, i) => `
+    <div class="card">
+      <h3>#${i + 1} ${u.username}</h3>
+      <p>🏆 Total Points: ${u.totalPoints}</p>
+    </div>
+  `).join("") || "<div class='card'>No scores yet</div>";
+}
+
+// ================= ADMIN =================
+async function loadAdmin() {
+  const res = await fetch(`${API}/games`);
+  const games = await res.json();
+
+  document.getElementById("adminGames").innerHTML = games.map(adminCard).join("");
+}
+
+function adminCard(g) {
+  return `
+    <div class="card">
+      <img class="poster" src="${g.image}" alt="${g.name}">
+      <h3>${g.name}</h3>
+      <p>Rating: ${g.rating} | Popularity: ${g.popularity} | Downloads: ${g.downloads}M</p>
+      <button class="btn" onclick="editGame(${g.id})">Edit</button>
+      <button class="btn" onclick="deleteGame(${g.id})">Delete</button>
+    </div>
+  `;
+}
+
+async function addGame() {
+  const game = {
+    name: document.getElementById("gname").value,
+    rating: Number(document.getElementById("grating").value),
+    downloads: Number(document.getElementById("gdownloads").value),
+    popularity: Number(document.getElementById("gpopularity").value),
+    category: document.getElementById("gcategory").value,
+    trending: document.getElementById("gtrending").value === "true"
+  };
+
+  const res = await fetch(`${API}/admin/games`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(game)
+  });
+
+  alert((await res.json()).message);
+  loadAdmin();
+}
+
+async function editGame(id) {
+  const rating = prompt("Enter new rating:");
+  const popularity = prompt("Enter new popularity:");
+  const downloads = prompt("Enter new downloads:");
+
+  const res = await fetch(`${API}/admin/games/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      rating: Number(rating),
+      popularity: Number(popularity),
+      downloads: Number(downloads)
+    })
+  });
+
+  alert((await res.json()).message);
+  loadAdmin();
+}
+
+async function deleteGame(id) {
+  const res = await fetch(`${API}/admin/games/${id}`, { method: "DELETE" });
+  alert((await res.json()).message);
+  loadAdmin();
 }
