@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Compare Games - GameRank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="animated-bg">
+    <div class="blob b1"></div>
+    <div class="blob b3"></div>
+  </div>
+
+  <nav class="topnav">
+    <div class="brand">🎮 <strong>GameRank</strong></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="compare.html">Compare</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero small">
+      <div>
+        <h1>Compare Games</h1>
+        <p class="muted">Select two titles and see how they stack up — instant scoring and highlights.</p>
+      </div>
+    </section>
+
+    <div class="card filter-card">
+      <div class="form-row">
+        <div>
+          <label>Select Game 1</label>
+          <select id="game1"></select>
+        </div>
+        <div>
+          <label>Select Game 2</label>
+          <select id="game2"></select>
+        </div>
+      </div>
+
+      <div class="filter-actions">
+        <button id="compareBtn" class="btn primary">Compare</button>
+        <div id="compareMessage" class="message" aria-live="polite"></div>
+      </div>
+    </div>
+
+    <div id="compareResult" class="grid compare-grid"></div>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="compare.js"></script>
+  <script>loadComparePage();</script>
+</body>
+</html>

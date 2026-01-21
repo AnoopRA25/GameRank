@@ -1,0 +1,696 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "adavirao",
+      "password": "1234"
+    },
+    {
+      "id": 1768975294397,
+      "username": "adavirao5",
+      "password": "12"
+    },
+    {
+      "id": 1768975534654,
+      "username": "adavirao3",
+      "password": "123456"
+    }
+  ],
+  "games": [
+    {
+      "id": 1,
+      "name": "PUBG Mobile",
+      "rating": 4.6,
+      "downloads": 500,
+      "popularity": 95,
+      "category": "Battle Royale",
+      "trending": true
+    },
+    {
+      "id": 2,
+      "name": "Free Fire",
+      "rating": 4.4,
+      "downloads": 900,
+      "popularity": 97,
+      "category": "Battle Royale",
+      "trending": true
+    },
+    {
+      "id": 3,
+      "name": "Call of Duty Mobile",
+      "rating": 4.7,
+      "downloads": 700,
+      "popularity": 90,
+      "category": "FPS",
+      "trending": true
+    },
+    {
+      "id": 4,
+      "name": "GTA V",
+      "rating": 4.9,
+      "downloads": 400,
+      "popularity": 88,
+      "category": "Open World",
+      "trending": true
+    },
+    {
+      "id": 5,
+      "name": "Minecraft",
+      "rating": 4.8,
+      "downloads": 1000,
+      "popularity": 99,
+      "category": "Sandbox",
+      "trending": true
+    },
+    {
+      "id": 6,
+      "name": "Valorant",
+      "rating": 4.5,
+      "downloads": 300,
+      "popularity": 85,
+      "category": "FPS",
+      "trending": false
+    },
+    {
+      "id": 7,
+      "name": "Fortnite",
+      "rating": 4.6,
+      "downloads": 600,
+      "popularity": 89,
+      "category": "Battle Royale",
+      "trending": false
+    },
+    {
+      "id": 8,
+      "name": "Apex Legends",
+      "rating": 4.4,
+      "downloads": 250,
+      "popularity": 83,
+      "category": "Battle Royale",
+      "trending": false
+    },
+    {
+      "id": 9,
+      "name": "Clash of Clans",
+      "rating": 4.5,
+      "downloads": 1200,
+      "popularity": 98,
+      "category": "Strategy",
+      "trending": true
+    },
+    {
+      "id": 10,
+      "name": "Among Us",
+      "rating": 4.2,
+      "downloads": 350,
+      "popularity": 70,
+      "category": "Party",
+      "trending": false
+    },
+    {
+      "id": 11,
+      "name": "Clash Royale",
+      "rating": 4.4,
+      "downloads": 800,
+      "popularity": 92,
+      "category": "Strategy",
+      "trending": true
+    },
+    {
+      "id": 12,
+      "name": "Brawl Stars",
+      "rating": 4.6,
+      "downloads": 650,
+      "popularity": 91,
+      "category": "Action",
+      "trending": true
+    },
+    {
+      "id": 13,
+      "name": "Roblox",
+      "rating": 4.3,
+      "downloads": 1100,
+      "popularity": 96,
+      "category": "Sandbox",
+      "trending": true
+    },
+    {
+      "id": 14,
+      "name": "League of Legends",
+      "rating": 4.7,
+      "downloads": 500,
+      "popularity": 90,
+      "category": "MOBA",
+      "trending": false
+    },
+    {
+      "id": 15,
+      "name": "Dota 2",
+      "rating": 4.6,
+      "downloads": 320,
+      "popularity": 86,
+      "category": "MOBA",
+      "trending": false
+    },
+    {
+      "id": 16,
+      "name": "Counter-Strike 2",
+      "rating": 4.8,
+      "downloads": 450,
+      "popularity": 94,
+      "category": "FPS",
+      "trending": true
+    },
+    {
+      "id": 17,
+      "name": "Rainbow Six Siege",
+      "rating": 4.5,
+      "downloads": 260,
+      "popularity": 80,
+      "category": "FPS",
+      "trending": false
+    },
+    {
+      "id": 18,
+      "name": "Overwatch 2",
+      "rating": 4.3,
+      "downloads": 200,
+      "popularity": 75,
+      "category": "FPS",
+      "trending": false
+    },
+    {
+      "id": 19,
+      "name": "Rocket League",
+      "rating": 4.6,
+      "downloads": 230,
+      "popularity": 82,
+      "category": "Sports",
+      "trending": false
+    },
+    {
+      "id": 20,
+      "name": "FIFA 24",
+      "rating": 4.2,
+      "downloads": 280,
+      "popularity": 84,
+      "category": "Sports",
+      "trending": false
+    },
+    {
+      "id": 21,
+      "name": "EA FC Mobile",
+      "rating": 4.4,
+      "downloads": 600,
+      "popularity": 88,
+      "category": "Sports",
+      "trending": true
+    },
+    {
+      "id": 22,
+      "name": "eFootball 2024",
+      "rating": 4.3,
+      "downloads": 550,
+      "popularity": 86,
+      "category": "Sports",
+      "trending": false
+    },
+    {
+      "id": 23,
+      "name": "Asphalt 9",
+      "rating": 4.5,
+      "downloads": 700,
+      "popularity": 90,
+      "category": "Racing",
+      "trending": true
+    },
+    {
+      "id": 24,
+      "name": "Need for Speed Heat",
+      "rating": 4.4,
+      "downloads": 200,
+      "popularity": 78,
+      "category": "Racing",
+      "trending": false
+    },
+    {
+      "id": 25,
+      "name": "Forza Horizon 5",
+      "rating": 4.8,
+      "downloads": 320,
+      "popularity": 92,
+      "category": "Racing",
+      "trending": true
+    },
+    {
+      "id": 26,
+      "name": "Gran Turismo 7",
+      "rating": 4.7,
+      "downloads": 210,
+      "popularity": 85,
+      "category": "Racing",
+      "trending": false
+    },
+    {
+      "id": 27,
+      "name": "Temple Run",
+      "rating": 4.2,
+      "downloads": 1300,
+      "popularity": 80,
+      "category": "Endless Runner",
+      "trending": false
+    },
+    {
+      "id": 28,
+      "name": "Subway Surfers",
+      "rating": 4.6,
+      "downloads": 2000,
+      "popularity": 98,
+      "category": "Endless Runner",
+      "trending": true
+    },
+    {
+      "id": 29,
+      "name": "Hill Climb Racing",
+      "rating": 4.4,
+      "downloads": 1600,
+      "popularity": 90,
+      "category": "Casual",
+      "trending": false
+    },
+    {
+      "id": 30,
+      "name": "Candy Crush Saga",
+      "rating": 4.5,
+      "downloads": 2500,
+      "popularity": 97,
+      "category": "Puzzle",
+      "trending": true
+    },
+    {
+      "id": 31,
+      "name": "Ludo King",
+      "rating": 4.4,
+      "downloads": 1500,
+      "popularity": 95,
+      "category": "Board",
+      "trending": true
+    },
+    {
+      "id": 32,
+      "name": "8 Ball Pool",
+      "rating": 4.6,
+      "downloads": 1400,
+      "popularity": 96,
+      "category": "Sports",
+      "trending": true
+    },
+    {
+      "id": 33,
+      "name": "Chess.com",
+      "rating": 4.7,
+      "downloads": 600,
+      "popularity": 88,
+      "category": "Board",
+      "trending": false
+    },
+    {
+      "id": 34,
+      "name": "Chess - Offline",
+      "rating": 4.4,
+      "downloads": 450,
+      "popularity": 75,
+      "category": "Board",
+      "trending": false
+    },
+    {
+      "id": 35,
+      "name": "Uno",
+      "rating": 4.3,
+      "downloads": 650,
+      "popularity": 82,
+      "category": "Card",
+      "trending": false
+    },
+    {
+      "id": 36,
+      "name": "Pokémon GO",
+      "rating": 4.1,
+      "downloads": 800,
+      "popularity": 70,
+      "category": "AR",
+      "trending": false
+    },
+    {
+      "id": 37,
+      "name": "Genshin Impact",
+      "rating": 4.6,
+      "downloads": 350,
+      "popularity": 90,
+      "category": "RPG",
+      "trending": true
+    },
+    {
+      "id": 38,
+      "name": "Honkai: Star Rail",
+      "rating": 4.7,
+      "downloads": 200,
+      "popularity": 87,
+      "category": "RPG",
+      "trending": true
+    },
+    {
+      "id": 39,
+      "name": "Mobile Legends",
+      "rating": 4.4,
+      "downloads": 950,
+      "popularity": 93,
+      "category": "MOBA",
+      "trending": true
+    },
+    {
+      "id": 40,
+      "name": "Arena of Valor",
+      "rating": 4.3,
+      "downloads": 500,
+      "popularity": 83,
+      "category": "MOBA",
+      "trending": false
+    },
+    {
+      "id": 41,
+      "name": "Stumble Guys",
+      "rating": 4.3,
+      "downloads": 400,
+      "popularity": 84,
+      "category": "Party",
+      "trending": true
+    },
+    {
+      "id": 42,
+      "name": "Fall Guys",
+      "rating": 4.4,
+      "downloads": 250,
+      "popularity": 78,
+      "category": "Party",
+      "trending": false
+    },
+    {
+      "id": 43,
+      "name": "PES 2021",
+      "rating": 4.3,
+      "downloads": 650,
+      "popularity": 80,
+      "category": "Sports",
+      "trending": false
+    },
+    {
+      "id": 44,
+      "name": "Dream League Soccer",
+      "rating": 4.4,
+      "downloads": 1200,
+      "popularity": 92,
+      "category": "Sports",
+      "trending": true
+    },
+    {
+      "id": 45,
+      "name": "CarX Drift Racing",
+      "rating": 4.5,
+      "downloads": 300,
+      "popularity": 82,
+      "category": "Racing",
+      "trending": false
+    },
+    {
+      "id": 46,
+      "name": "Real Racing 3",
+      "rating": 4.5,
+      "downloads": 750,
+      "popularity": 88,
+      "category": "Racing",
+      "trending": false
+    },
+    {
+      "id": 47,
+      "name": "F1 Mobile Racing",
+      "rating": 4.1,
+      "downloads": 350,
+      "popularity": 72,
+      "category": "Racing",
+      "trending": false
+    },
+    {
+      "id": 48,
+      "name": "Shadow Fight 2",
+      "rating": 4.6,
+      "downloads": 800,
+      "popularity": 90,
+      "category": "Fighting",
+      "trending": true
+    },
+    {
+      "id": 49,
+      "name": "Shadow Fight 3",
+      "rating": 4.4,
+      "downloads": 450,
+      "popularity": 82,
+      "category": "Fighting",
+      "trending": false
+    },
+    {
+      "id": 50,
+      "name": "Mortal Kombat",
+      "rating": 4.7,
+      "downloads": 260,
+      "popularity": 80,
+      "category": "Fighting",
+      "trending": false
+    },
+    {
+      "id": 51,
+      "name": "Tekken 7",
+      "rating": 4.6,
+      "downloads": 200,
+      "popularity": 78,
+      "category": "Fighting",
+      "trending": false
+    },
+    {
+      "id": 52,
+      "name": "God of War",
+      "rating": 4.9,
+      "downloads": 180,
+      "popularity": 84,
+      "category": "Action",
+      "trending": true
+    },
+    {
+      "id": 53,
+      "name": "Red Dead Redemption 2",
+      "rating": 4.9,
+      "downloads": 190,
+      "popularity": 86,
+      "category": "Open World",
+      "trending": true
+    },
+    {
+      "id": 54,
+      "name": "The Witcher 3",
+      "rating": 4.8,
+      "downloads": 170,
+      "popularity": 82,
+      "category": "RPG",
+      "trending": false
+    },
+    {
+      "id": 55,
+      "name": "Skyrim",
+      "rating": 4.7,
+      "downloads": 150,
+      "popularity": 80,
+      "category": "RPG",
+      "trending": false
+    },
+    {
+      "id": 56,
+      "name": "Elden Ring",
+      "rating": 4.9,
+      "downloads": 140,
+      "popularity": 88,
+      "category": "RPG",
+      "trending": true
+    },
+    {
+      "id": 57,
+      "name": "Dark Souls 3",
+      "rating": 4.8,
+      "downloads": 120,
+      "popularity": 79,
+      "category": "RPG",
+      "trending": false
+    },
+    {
+      "id": 58,
+      "name": "Sekiro",
+      "rating": 4.9,
+      "downloads": 110,
+      "popularity": 80,
+      "category": "Action",
+      "trending": false
+    },
+    {
+      "id": 59,
+      "name": "Hades",
+      "rating": 4.8,
+      "downloads": 100,
+      "popularity": 78,
+      "category": "Roguelike",
+      "trending": false
+    },
+    {
+      "id": 60,
+      "name": "Hollow Knight",
+      "rating": 4.8,
+      "downloads": 90,
+      "popularity": 74,
+      "category": "Metroidvania",
+      "trending": false
+    },
+    {
+      "id": 61,
+      "name": "Resident Evil 4 Remake",
+      "rating": 4.8,
+      "downloads": 130,
+      "popularity": 82,
+      "category": "Horror",
+      "trending": true
+    },
+    {
+      "id": 62,
+      "name": "Resident Evil Village",
+      "rating": 4.7,
+      "downloads": 120,
+      "popularity": 79,
+      "category": "Horror",
+      "trending": false
+    },
+    {
+      "id": 63,
+      "name": "The Last of Us",
+      "rating": 4.9,
+      "downloads": 160,
+      "popularity": 88,
+      "category": "Story",
+      "trending": true
+    },
+    {
+      "id": 64,
+      "name": "Uncharted 4",
+      "rating": 4.8,
+      "downloads": 140,
+      "popularity": 84,
+      "category": "Adventure",
+      "trending": false
+    },
+    {
+      "id": 65,
+      "name": "Assassin’s Creed Valhalla",
+      "rating": 4.6,
+      "downloads": 220,
+      "popularity": 81,
+      "category": "Open World",
+      "trending": false
+    },
+    {
+      "id": 66,
+      "name": "Assassin’s Creed Mirage",
+      "rating": 4.4,
+      "downloads": 110,
+      "popularity": 77,
+      "category": "Open World",
+      "trending": true
+    },
+    {
+      "id": 67,
+      "name": "Cyberpunk 2077",
+      "rating": 4.6,
+      "downloads": 210,
+      "popularity": 84,
+      "category": "Open World",
+      "trending": true
+    },
+    {
+      "id": 68,
+      "name": "Watch Dogs 2",
+      "rating": 4.5,
+      "downloads": 180,
+      "popularity": 76,
+      "category": "Open World",
+      "trending": false
+    },
+    {
+      "id": 69,
+      "name": "Far Cry 6",
+      "rating": 4.4,
+      "downloads": 190,
+      "popularity": 75,
+      "category": "FPS",
+      "trending": false
+    },
+    {
+      "id": 70,
+      "name": "Far Cry 5",
+      "rating": 4.5,
+      "downloads": 200,
+      "popularity": 76,
+      "category": "FPS",
+      "trending": false
+    },
+    {
+      "id": 71,
+      "name": "Metal Gear Solid V",
+      "rating": 4.8,
+      "downloads": 120,
+      "popularity": 78,
+      "category": "Stealth",
+      "trending": false
+    },
+    {
+      "id": 72,
+      "name": "Hitman 3",
+      "rating": 4.7,
+      "downloads": 110,
+      "popularity": 77,
+      "category": "Stealth",
+      "trending": true
+    },
+    {
+      "id": 73,
+      "name": "Control",
+      "rating": 4.6,
+      "downloads": 90,
+      "popularity": 72,
+      "category": "Action",
+      "trending": false
+    },
+    {
+      "id": 74,
+      "name": "Death Stranding",
+      "rating": 4.5,
+      "downloads": 85,
+      "popularity": 70,
+      "category": "Adventure",
+      "trending": false
+    },
+    {
+      "id": 75,
+      "name": "Prince of Persia",
+      "rating": 4.6,
+      "downloads": 100,
+      "popularity": 74,
+      "category": "Adventure",
+      "trending": false
+    }
+  ]
+}

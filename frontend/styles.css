@@ -1,0 +1,140 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg,#071026 0%, #0b1220 50%, #0f1724 100%);
+  color: #e6eef8;
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  background: #121a2b;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+  font-weight: bold;
+}
+
+.container {
+  padding: 30px;
+}
+
+.card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding: 15px;
+  border-radius: 12px;
+  margin: 10px 0;
+  box-shadow: 0 8px 30px rgba(2,6,23,0.6);
+}
+
+/* card hover and pop animation */
+.card{transition:transform .22s ease,box-shadow .22s ease}
+.card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 18px 40px rgba(2,6,23,0.55)}
+.card.pop{animation:cardIn .36s cubic-bezier(.2,.8,.2,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(12px) scale(.995)}to{opacity:1;transform:none}}
+
+.filter-card .form-row{display:flex;gap:12px}
+.filter-card label{display:block;color:#9fb3d9;font-size:12px;margin-bottom:6px}
+.filter-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+
+.quick-stats{display:flex;gap:18px;justify-content:space-around;align-items:center}
+.quick-stats div{text-align:center}
+
+
+.btn {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #3b82f6;
+  color: white;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background: #2563eb;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  border: none;
+}
+select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  margin: 8px 0;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+/* ---------- New styles for login page ---------- */
+.animated-bg{position:fixed;inset:0;overflow:hidden;z-index:0}
+.blob{position:absolute;border-radius:50%;filter:blur(60px);opacity:.6;transform:translate3d(0,0,0)}
+.b1{width:360px;height:360px;left:-80px;top:-80px;background:radial-gradient(circle at 30% 30%,#6ee7b7,#10b981)}
+.b2{width:420px;height:420px;right:-120px;bottom:-100px;background:radial-gradient(circle at 70% 70%,#60a5fa,#7c3aed)}
+.b3{width:220px;height:220px;left:60%;top:10%;background:radial-gradient(circle at 30% 70%,#f97316,#fb7185);animation:float 6s ease-in-out infinite}
+
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-20px)}100%{transform:translateY(0)}}
+
+.auth-container{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;padding:40px}
+.auth-card{width:380px;max-width:92vw;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));padding:28px;border-radius:14px;backdrop-filter: blur(6px);box-shadow:0 10px 40px rgba(2,6,23,0.6);text-align:center}
+.auth-card .logo{font-weight:900;font-size:22px;color:#fff;margin-bottom:6px}
+.auth-card h2{margin:4px 0 6px;font-size:20px}
+.auth-card .muted{color:#b8c7db;font-size:13px;margin-bottom:16px}
+
+.login-form{display:flex;flex-direction:column;gap:12px}
+.input-wrapper{position:relative;display:flex;align-items:center}
+.input-wrapper .icon{position:absolute;left:12px;color:#9fb3d9}
+.input-wrapper .input{padding-left:40px;padding-right:48px;height:44px;background:rgba(255,255,255,0.02);color:inherit;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+.input-wrapper .input::placeholder{color:#9fb3d9}
+.input-wrapper .eye{position:absolute;right:8px;border:none;background:transparent;color:#cfe6ff;padding:6px;border-radius:8px;cursor:pointer}
+
+.message{min-height:20px;font-size:13px;color:#ffd6d6}
+.message.success{color:#b8f1d3}
+
+.btn.primary{background:linear-gradient(90deg,#7c3aed,#3b82f6);box-shadow:0 8px 20px rgba(59,130,246,0.12)}
+.btn.primary.loading{opacity:.9;pointer-events:none}
+.btn.primary.loading::after{content:'';display:inline-block;margin-left:8px;width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,0.6);border-top-color:transparent;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.or{font-size:12px;color:#9fb3d9;margin-top:8px}
+.socials{display:flex;gap:8px;justify-content:center}
+.btn.social{background:rgba(255,255,255,0.03);color:#e6eef8;width:48px;height:40px;border-radius:10px}
+.signup{font-size:13px;color:#9fb3d9;margin-top:10px}
+
+.shake{animation:shake .35s}
+@keyframes shake{0%{transform:translateX(0)}25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-4px)}100%{transform:translateX(0)}}
+
+/* small responsive tweaks */
+@media (max-width:420px){.auth-card{padding:18px;width:92vw}.b2{display:none}}
+
+/* Compare page styles */
+.compare-grid{grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.compare-grid .card{position:relative;overflow:hidden;transition:transform .28s,box-shadow .28s}
+.compare-grid .card.winner{border:2px solid transparent;box-shadow:0 18px 40px rgba(59,130,246,0.18);background:linear-gradient(90deg, rgba(124,58,237,0.12), rgba(59,130,246,0.08));}
+.compare-grid .card.loser{opacity:0.7;filter:grayscale(.06)}
+.compare-grid .card.tie{outline:2px dashed rgba(255,255,255,0.06)}
+
+.compare-grid .badge-winner{position:absolute;right:12px;top:12px;background:linear-gradient(90deg,#f59e0b,#ef4444);color:#08101a;padding:6px 10px;border-radius:999px;font-weight:700}
+
+.compare-grid .stat{display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid rgba(255,255,255,0.02);color:#cfe6ff}
+
+/* Fix for clickable elements: ensure animated background doesn't capture pointer events
+  and bring nav/container above the background. This prevents blobs from blocking clicks. */
+.animated-bg, .animated-bg *{pointer-events:none}
+.topnav{position:relative;z-index:3}
+.container, main.container, .filter-card{position:relative;z-index:2}
+
+

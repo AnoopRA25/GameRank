@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GameRank - Trending + Ranking</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="animated-bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+  </div>
+
+  <nav class="topnav">
+    <div class="brand">🎮 <strong>GameRank</strong></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="compare.html">Compare</a>
+      <a href="login.html" onclick="logout()">Logout</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <h1>Discover the best games</h1>
+        <p class="muted">Trending picks, powerful filters, and dynamic rankings — tailored for gamers.</p>
+      </div>
+      <div class="quick-stats card">
+        <div><strong id="totalGames">0</strong><div class="muted">Games</div></div>
+        <div><strong id="trendingCount">0</strong><div class="muted">Trending</div></div>
+        <div><strong id="rankedCount">0</strong><div class="muted">Ranked</div></div>
+      </div>
+    </section>
+
+    <h2>🔥 Trending Games</h2>
+    <div id="trending" class="grid"></div>
+
+    <h2>🎯 All Games (Search + Filter)</h2>
+
+    <div class="card filter-card">
+      <input class="input" id="searchInput" placeholder="Search game (ex: GTA, PUBG, Minecraft)..." oninput="applyFilters()">
+
+      <div class="form-row">
+        <div>
+          <label>Category</label>
+          <select id="categoryFilter" onchange="applyFilters()"></select>
+        </div>
+        <div>
+          <label>Trending</label>
+          <select id="trendingFilter" onchange="applyFilters()">
+            <option value="all">All</option>
+            <option value="true">Trending Only</option>
+            <option value="false">Non-Trending Only</option>
+          </select>
+        </div>
+        <div>
+          <label>Sort</label>
+          <select id="sortBy" onchange="applyFilters()">
+            <option value="score">Ranking Score</option>
+            <option value="rating">Rating</option>
+            <option value="downloads">Downloads</option>
+            <option value="popularity">Popularity</option>
+            <option value="name">Name (A-Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="filter-actions">
+        <button class="btn" onclick="applyFilters()">Apply</button>
+        <button class="btn" onclick="clearFilters()">Clear</button>
+      </div>
+    </div>
+
+    <div id="allGames" class="grid"></div>
+
+    <h2>🏆 Ranked Games</h2>
+    <div id="ranked" class="grid"></div>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="index.js"></script>
+  <script>loadHome();</script>
+</body>
+</html>

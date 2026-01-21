@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Register - GameRank</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="animated-bg">
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+
+  <main class="auth-container">
+    <div class="auth-card">
+      <div class="logo">GameRank</div>
+      <h2>Create your account</h2>
+      <p class="muted">Join to save favorites, rate, and compare games.</p>
+
+      <form id="registerForm" class="login-form" onsubmit="return false" novalidate>
+        <div class="input-wrapper">
+          <input id="username" class="input" placeholder="Username" autocomplete="username" required>
+        </div>
+
+        <div class="input-wrapper">
+          <input id="password" class="input" type="password" placeholder="Password" autocomplete="new-password" required>
+          <button type="button" id="togglePassword" class="eye" aria-label="Show password">👁️</button>
+        </div>
+
+        <div id="message" class="message" aria-live="polite"></div>
+
+        <button id="registerBtn" class="btn primary" type="submit">Create account</button>
+
+        <p class="signup">Already have an account? <a href="login.html">Sign in</a></p>
+      </form>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+  <script src="register.js"></script>
+</body>
+</html>
