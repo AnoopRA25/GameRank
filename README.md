@@ -142,13 +142,3 @@ This project is for educational purposes.
 
 
 ---
-
-# ✅ Next Step: Push README to GitHub
-
-In CMD:
-
-```cmd
-cd D:\GameRank
-git add README.md
-git commit -m "Added README"
-git push
